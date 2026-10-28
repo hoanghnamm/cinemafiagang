@@ -4,10 +4,14 @@ import { createPortal } from 'react-dom';
 // Supply confirmed silent preview clips (local or CDN URLs) and optional posters.
 // No existing film is attributed to a director without confirmed credits.
 const directors = [
-  { name: 'Hoang Hai Nam', initials: 'HHN', previewUrl: null, poster: null },
-  { name: 'Long Do', initials: 'LD', previewUrl: null, poster: null },
-  { name: 'Le Minh', initials: 'LM', previewUrl: null, poster: null },
-  { name: 'Nguyen Tien', initials: 'NT', previewUrl: null, poster: null },
+  { name: 'Do Hoang Long', initials: 'DHL', role: 'Founder, Cinematographer, Colorist', previewUrl: null, poster: null },
+  { name: 'Le Quang Minh', initials: 'LQM', role: 'Assistant Director', previewUrl: null, poster: null },
+  { name: 'Phan Nam Anh', initials: 'PNA', role: 'Producer', previewUrl: null, poster: null },
+  { name: 'Nguyen Thi Truc Anh', initials: 'NTTA', role: 'Producer', previewUrl: null, poster: null },
+  { name: 'Vo Hong Minh', initials: 'VHM', role: 'Camera Operator', previewUrl: null, poster: null },
+  { name: 'Pham Chu Binh', initials: 'PCB', role: 'Editor, VFX', previewUrl: null, poster: null },
+  { name: 'Nguyen Quang Tien', initials: 'NQT', role: 'Editor', previewUrl: null, poster: null },
+  { name: 'Hoang Hai Nam', initials: 'HHN', role: 'Technical Specialist', previewUrl: null, poster: null },
 ];
 
 export default function Directors() {
@@ -17,7 +21,6 @@ export default function Directors() {
   const motion = useRef(null);
 
   useEffect(() => {
-    document.body.classList.add('directors-theme');
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     const trail = { samples: [], x: 0, y: 0, targetX: 0, targetY: 0, placed: false };
     motion.current = trail;
@@ -51,7 +54,6 @@ export default function Directors() {
     window.addEventListener('keydown', escape);
     return () => {
       cancelAnimationFrame(frame); motion.current = null;
-      document.body.classList.remove('directors-theme');
       window.removeEventListener('pointermove', move);
       window.removeEventListener('pointerout', leave);
       window.removeEventListener('blur', hide);
@@ -80,8 +82,9 @@ export default function Directors() {
 
   return (
     <section className="directors-page" aria-labelledby="directors-title">
-      <div className="directors-heading"><h1 id="directors-title" tabIndex={-1} style={{fontSize: "inherit", fontWeight: 400}}>The people behind the picture</h1><span>Our directors / 04</span></div>
-      <ul className={`director-list${visible ? ' has-preview' : ''}`} aria-label="Directors"
+      <div className="directors-heading"><span>The people behind the picture</span><span>The gang / 08</span></div>
+      <h1 id="directors-title" className="directors-intro" tabIndex={-1}>Different eyes.<br /><em>One vision.</em></h1>
+      <ul className={`director-list${visible ? ' has-preview' : ''}`} aria-label="The crew"
         onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setVisible(false); }}>
         {directors.map((director, index) => (
           <li key={director.name}>
@@ -95,7 +98,7 @@ export default function Directors() {
               onFocus={event => activate(index, event)}
               onClick={event => activate(index, event)}
               onKeyDown={event => { if (event.key === 'Escape') setVisible(false); }}>
-              {director.name}
+              <span className="director-name">{director.name}</span><span className="director-role">{director.role}</span>
             </button>
           </li>
         ))}
@@ -105,7 +108,7 @@ export default function Directors() {
           <Preview key={director.name} director={director} index={index} active={visible && selected === index} />
         ))}
       </div>, document.body)}
-      <span className="sr-only" aria-live="polite">{visible && selected !== null && !directors[selected].previewUrl ? `${directors[selected].name}: reel coming soon.` : ''}</span>
+      <span className="sr-only" aria-live="polite">{visible && selected !== null && !directors[selected].previewUrl ? `${directors[selected].name}: ${directors[selected].role}.` : ''}</span>
     </section>
   );
 }
@@ -127,6 +130,6 @@ function Preview({ director, index, active }) {
   }, [active]);
   return <div className={`director-preview-layer director-tone-${index}${active ? ' is-active' : ''}`}>
     {director.previewUrl ? <video ref={video} src={director.previewUrl} poster={director.poster || undefined} loop muted playsInline preload="metadata" />
-      : <>{director.poster && <img src={director.poster} alt="" />}<span className="director-monogram">{director.initials}</span><span className="director-pending">Reel coming soon</span></>}
+      : <>{director.poster && <img src={director.poster} alt="" />}<span className="director-monogram">{director.initials}</span><span className="director-pending">{director.role}</span></>}
   </div>;
 }

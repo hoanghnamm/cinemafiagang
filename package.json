@@ -5,7 +5,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check:deploy": "node scripts/check-deploy.mjs",
+    "cf:login": "wrangler login",
+    "cf:whoami": "wrangler whoami",
+    "cf:create": "wrangler pages project create cinemafiagang --production-branch main",
+    "cf:preview": "npm run build && npm run check:deploy && wrangler pages dev dist",
+    "deploy": "npm run build && npm run check:deploy && wrangler pages deploy dist --project-name cinemafiagang --branch main"
   },
   "dependencies": {
     "gsap": "^3.15.0",
@@ -14,6 +20,10 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^6.1.2",
-    "vite": "^8.3.4"
+    "vite": "^8.3.4",
+    "wrangler": "^4.154.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   }
 }

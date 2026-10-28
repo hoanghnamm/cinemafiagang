@@ -110,7 +110,7 @@ export default function App() {
           <nav className={`site-nav${navOpen ? ' is-open' : ''}`} id="site-navigation" aria-label="Main navigation">
             <ul className="nav-menu">
               <li><a href="/#work" className="nav-link" onClick={onNavLink}>Work</a></li>
-              <li><a href="/directors/" className="nav-link" aria-current={isDirectors ? "page" : undefined} onClick={onNavLink}>Directors</a></li>
+              <li><a href="/directors/" className="nav-link" aria-current={isDirectors ? "page" : undefined} onClick={onNavLink}>The Gang</a></li>
               <li><a href="/#services" className="nav-link" onClick={onNavLink}>Services</a></li>
               <li><a href="/#contact" className="nav-link" onClick={onNavLink}>Contact</a></li>
             </ul>
@@ -125,11 +125,10 @@ export default function App() {
       <main className="page" id="top" inert={pageInert}>
         {isDirectors ? <Directors /> : <>
         <section className="hero" aria-labelledby="hero-title">
-          <div className="hero-eyebrow"><span>Independent film collective</span><span>Hanoi, Vietnam · 21°01′ N</span></div>
           <h1 className="hero-title" id="hero-title" aria-label="CINEMAFIAGANG"><span>CINEMA</span><span>FIA<span className="hero-star" aria-hidden="true">✳</span>GANG</span></h1>
-          <div className="hero-bottom"><p>Good films.<br />Made together.</p><p>A shared obsession with moving images.<br />From the first spark to the final frame.</p><a href="#work" className="text-link">Explore our work <span>↓</span></a></div>
+          <div className="hero-bottom"><a href="#work" className="text-link">Explore our work <span>↓</span></a></div>
           <div className="hero-frame"><FeaturedPreview /></div>
-          <div className="film-caption"><span><i className="status-dot" /> Featured film / 01</span><span>“Thích Anh Cơ” — Hằng ssi ft. Aries tis</span><a href={YOUTUBE} onClick={openVideo}>Watch full film <span>↗</span></a></div>
+          <div className="film-caption"><span>“Thích Anh Cơ” — Hằng ssi ft. Aries tis</span><a href={YOUTUBE} onClick={openVideo}>Watch full film </a></div>
         </section>
 
         <div className="marquee" aria-label="Disciplines">
@@ -145,24 +144,24 @@ export default function App() {
         <Manifesto />
 
         <section className="chapter work-section" id="work" aria-labelledby="work-title">
-          <div className="section-label"><span>01 / The films</span><span>Selected work, 2025—2026</span></div>
-          <div className="chapter-head"><h2 className="display" id="work-title">MADE TO<br /><em>move you.</em></h2><p>Different stories. The same commitment<br />to every single frame.</p></div>
+          <div className="section-label"><span>01 / The films</span></div>
+          <div className="chapter-head"><h2 className="display" id="work-title">MADE TO<br /><em>move you.</em></h2></div>
           <div className="work-grid">
             {works.map((w, index) => (
               <a key={w.id} className={`work-card work-card--${index}`} href={w.href} target="_blank" rel="noopener">
-                <div className="work-image"><img src={`/assets/img/covers/${w.id}.webp`} alt="" loading="lazy" decoding="async" width="808" height="632" /><span className="work-open" aria-hidden="true">↗</span><span className="work-index">0{index + 1}</span></div>
+                <div className="work-image"><img src={`/assets/img/covers/${w.id}.webp`} alt="" loading="lazy" decoding="async" width="808" height="632" /><span className="work-index">0{index + 1}</span></div>
                 <div className="work-meta"><h3>{w.title}</h3><span>{w.kind}</span></div>
                 {w.credit && <p className="work-credit">{w.credit}</p>}
                 <span className="sr-only">(opens on Behance in a new tab)</span>
               </a>
             ))}
           </div>
-          <a className="text-link work-all" href="https://instagram.com/cinemafiagang" target="_blank" rel="noopener">Follow the gang <span>↗</span></a>
+          <a className="text-link work-all" href="https://instagram.com/cinemafiagang" target="_blank" rel="noopener">Follow the gang </a>
         </section>
 
         <section className="chapter services-section" id="services" aria-labelledby="services-title">
           <div className="section-label"><span>02 / What we do</span><span>From idea to screen</span></div>
-          <div className="services-intro"><h2 id="services-title">One collective.<br /><em>The whole picture.</em></h2><p>We bring the people, the craft and the care.<br />You bring the story worth telling.</p></div>
+          <div className="services-intro"><h2 id="services-title">One collective.<br /><em>The whole picture.</em></h2></div>
           <div className="service-list">
             <details className="service" open><summary><span className="service-number">01</span><h3>Film production</h3><span className="service-toggle" aria-hidden="true">+</span></summary><div className="service-content"><p>Music videos, short films and fashion films. From shaping the first idea to bringing the crew together on set.</p><span>CONCEPT / DIRECTION / PRODUCTION</span><img src="/assets/img/bts/set-room.webp" alt="Lighting and camera setup on a CINEMAFIAGANG film set" loading="lazy" /></div></details>
             <details className="service"><summary><span className="service-number">02</span><h3>Post-production</h3><span className="service-toggle" aria-hidden="true">+</span></summary><div className="service-content"><p>Finding the rhythm. Shaping the look. Editing and color grading, finished in-house with the same attention as the shoot.</p><span>EDITING / COLOR GRADING / FINISHING</span><img src="/assets/img/bts/grade-desk.webp" alt="The collective’s color grading workstation" loading="lazy" /></div></details>
@@ -170,8 +169,8 @@ export default function App() {
         </section>
 
         <section className="crew-section" aria-labelledby="crew-title">
-          <div className="section-label"><span>03 / Behind the frames</span><a href="/directors/">Meet our directors ↗</a></div>
-          <div className="crew-composition"><figure className="crew-photo crew-photo--one"><img src="/assets/img/bts/set-school.webp" alt="The crew filming on location at a school in Hanoi" loading="lazy" /><figcaption>On location. Hanoi.</figcaption></figure><div className="crew-copy"><span className="crew-asterisk" aria-hidden="true">✳</span><h2 id="crew-title">IT TAKES<br />A <em>gang.</em></h2><p>Different eyes. Shared instincts.<br />A film is never made alone.</p><a href="/directors/" className="text-link">Meet the people <span>↗</span></a></div><figure className="crew-photo crew-photo--two"><img src="/assets/img/bts/set-kitchen.webp" alt="Camera and lighting equipment behind the scenes" loading="lazy" /><figcaption>Between the takes.</figcaption></figure></div>
+          <div className="section-label"><span>03 / Behind the frames</span><a href="/directors/">Meet the gang</a></div>
+          <div className="crew-composition"><figure className="crew-photo crew-photo--one"><img src="/assets/img/bts/set-school.webp" alt="The crew filming on location at a school in Hanoi" loading="lazy" /><figcaption>On location. Hanoi.</figcaption></figure><div className="crew-copy"><span className="crew-asterisk" aria-hidden="true">✳</span><h2 id="crew-title">IT TAKES<br />A <em>gang.</em></h2><p>Different eyes. Shared instincts.<br />A film is never made alone.</p><a href="/directors/" className="text-link">Meet the people </a></div><figure className="crew-photo crew-photo--two"><img src="/assets/img/bts/set-kitchen.webp" alt="Camera and lighting equipment behind the scenes" loading="lazy" /><figcaption>Between the takes.</figcaption></figure></div>
           <p className="crew-footnote">Shot, lit & graded by the same hands. <span>That’s our kind of filmmaking.</span></p>
         </section>
 
@@ -179,8 +178,7 @@ export default function App() {
 
         {/* Action */}
         <footer className="site-footer" id="contact">
-          <p className="footer-kicker">04 / Your next film starts here</p>
-          <h2 className="footer-cta"><a href={`mailto:${EMAIL}`}>LET’S MAKE<br /><em>something move.</em><span className="footer-arrow" aria-hidden="true">↗</span></a></h2>
+          <h2 className="footer-cta"><a href={`mailto:${EMAIL}`}>LET’S MAKE<br /><em>something move.</em></a></h2>
           <div className="footer-actions">
             <button className="btn btn-primary" type="button" onClick={openBooking}>Send a brief</button>
             <a className="btn btn-ghost" href={`mailto:${EMAIL}`}>{EMAIL}</a>
@@ -211,8 +209,8 @@ export default function App() {
             <div><dt>Published</dt><dd>{featuredFilm.format}</dd></div>
           </dl>
           <p className="modal-links">
-            <a href={YOUTUBE} target="_blank" rel="noopener">Watch on YouTube ↗</a>
-            <a href={works[0].href} target="_blank" rel="noopener">Credits on Behance ↗</a>
+            <a href={YOUTUBE} target="_blank" rel="noopener">Watch on YouTube</a>
+            <a href={works[0].href} target="_blank" rel="noopener">Credits on Behance</a>
           </p>
         </div>
       </Modal>
@@ -324,8 +322,7 @@ function Manifesto() {
 
   return (
     <section className="chapter manifesto" aria-label="About the collective">
-      <div className="manifesto-label"><span className="status-dot" /> The collective<br /><span className="manifesto-location">Rooted in Hanoi.<br />Driven by curiosity.</span></div>
-      <div><p ref={ref} className="scrub-text">{words('We turn a shared obsession with cinema into ')}{still('246413035')}{words(' films that feel like something.')}</p><div className="manifesto-bottom"><p>We are CINEMAFIAGANG. An independent collective making music videos, short films and fashion films. A close-knit crew, from first idea to final cut.</p><a href="/directors/" className="text-link">Get to know us <span>↗</span></a></div></div>
+      <div><p ref={ref} className="scrub-text">{words('We turn a shared obsession with cinema into ')}{still('246413035')}{words(' films that feel like something.')}</p><div className="manifesto-bottom"><p>We are CINEMAFIAGANG. An independent collective making music videos, short films and fashion films. A close-knit crew, from first idea to final cut.</p><a href="/directors/" className="text-link">Get to know us </a></div></div>
     </section>
   );
 }
